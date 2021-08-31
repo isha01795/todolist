@@ -39,6 +39,7 @@ function TodoList() {
     }
     else{
       setTodos([]);
+      localStorage.removeItem("list");
 
     }
    }

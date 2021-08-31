@@ -1,13 +1,19 @@
 import React, {useState} from 'react'
 import {GoogleLogin, GoogleLogout} from 'react-google-login';
 import TodoList from './TodoList';
+
+
+let username = localStorage.getItem("username");
+
 const Login=()=> {
 
  const [loginButton, setLoginButton] = useState(true);
  const [logoutButton,setLogoutButton] = useState(false);
  const clientId = "289559916406-f72vmk0qgbadovqsurqu3156orp16e4l.apps.googleusercontent.com";
  const onLoginSuccess = (res) => {
-     console.log('login success:', res.profileObj);
+    const username = res.profileObj.name;
+    // console.log("Login Success,Current User:", res.profileObj.name);
+    localStorage.setItem("username", username);
      setLoginButton(false);
      setLogoutButton(true);
  };
@@ -19,6 +25,7 @@ const Login=()=> {
  const onLogoutSuccess = () => {
      alert("You have been logged out successfully.")
      console.clear();
+     localStorage.removeItem("username");
      setLogoutButton(false);
      setLoginButton(true);
  }
@@ -46,7 +53,11 @@ const Login=()=> {
 
             {logoutButton ? 
             <div className="logout_button">
-            <div>  <TodoList /> </div>
+            <div> 
+            <div className="username">
+                Welcome! {username}
+            </div>
+             <TodoList /> </div>
 
             <div className="logout">
    {/* <span> Logout👉</span> */}
