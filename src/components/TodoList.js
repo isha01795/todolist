@@ -30,7 +30,7 @@ function TodoList() {
   };
 
   const removeAll = () => {
-  if (  todos.length==0){
+  if (  todos.length===0){
          alert("Add a Todo first.")
   }
   else{
